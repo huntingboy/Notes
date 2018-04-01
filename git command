@@ -1,0 +1,33 @@
+#命令行托管代码
+echo "# TravellMap" >> README.md (optional)
+git init
+git add README.md
+git commit -m "first commit" 
+#创建远程仓库   origin为"remote name"，后面要用  TravellMap为"repository name"
+git remote add origin https://github.com/huntingboy/TravellMap.git
+#传到github相应仓库上面
+git push -u origin master
+
+#可选：
+#看日志
+git log 
+git log --oneline
+#查看修改状态
+git status
+#回退到***
+git reset ***(随机的code)
+
+#直接在android studio托管代码:
+1.file->setting->vesion control->git填git命令路径
+2.file->setting->vesion control->github填github.com ,用户名，密码
+3.vcs->enble****
+4.项目右键->git->add
+5.项目右键->git->commit repository
+5.vcs->import into vc->share project on github
+6.填写repository name ,remote name
+7.若有改变,vcs->commit change,  vcs->git->push
+
+
+
+			#问题描述							  				解决方法	
+remote reposotory created but authorention failed			不选file->setting->vesion control->github->use ssh

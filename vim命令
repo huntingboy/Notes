@@ -1,0 +1,36 @@
+选择模式：
+复制到系统剪贴板		"+y 双引号
+查找		/*** (forward)   ?*** (afterward)    N 向上 n 向下
+历史 	q:
+分框		split vsplist  
+新文件浏览器  n/sexplore  l/rexplore
+提纲		tagbaropen  TListTag
+跳到行	:17  17G
+跳到尾	G
+跳到头	gg
+翻页		]]  [[
+聚焦		ctr-w ctr-j/k/l/h
+supertab	ctrl-x ctrl-o/e/l/u***    ctrl-p/n
+回复撤销		ctrl-r
+
+ctags跳转  在源文件根目录 ctags -R 若文件有变动，需重新运行此命令。 vim *.c  :set tags=/home/***/tags   c-]  c-t  gd
+新建tags  f5
+f2:  c-x-i关键字匹配
+f3:  c-x-o全能匹配
+整行匹配c-x-l
+注释//：:27,30s#^#//#g	
+取消注释：:27,30s#^//##g   
+注释#：:10,20s/^/#/g
+取消注释：:10,20s/^/#/g
+或者使用块选择模式匹配
+
+
+c-v块选择模式 列选择
+I 块模式下进入插入模式
+连按两下esc
+
+回退修改：c-r
+缩进：=
+代码格式化：gg=G
+行缩进：==
+下面7行缩进：7=

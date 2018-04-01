@@ -1,0 +1,274 @@
+cd - :切换之前工作目录
+安装软件：sudo apt-get install 软件名
+软件位置：
+which 软件名   （执行文件位置）
+type 软件名   （执行文件位置）
+sudo find / -name 软件名
+whereis 软件名 （安装位置一般是第二个）
+locate 软件名（效果不理想）
+dpkg -L 软件名（使用apt-get install 安装的）
+移除文件：sudo apt-get remove 软件名
+更新软件源：sudo apt-get update
+添加源：sudo add-apt-repository ppa:username/packagename
+删除源：cd /etc/apt/sources.list.d/；删除某个源
+	或 sudo add-apt-repository -r ppa:username/packagename
+打开并且编辑hosts:sudo gedit /etc/hosts
+重启网络：sudo service network-management restart
+
+
+打开并且编辑源：sudo gedit /etc/apt/sources.list
+
+改变Launcher启动器的位置：gsettings set com.canonical.Unity.Launcher launcher-position Left(Bottom)
+
+
+
+
+
+快捷键：
+工作区切换：ctrl + alt + 方向键
+改变窗口大小：alt + f7
+改变窗口位置：alt + f8
+显示隐藏文件：ctrl + h
+
+关于Android Read Only file::
+1. 查看System挂载在哪个分区
+mount
+例如：查看到是/dev/block/mmcblk0p25
+
+2. 修改System权限为read， write
+mount -o remount,rw -t yaffs2 /dev/block/mmcblk0p25 /system  ;  此处放要做的操作（因为授权时间很短）
+mount -t ext4 -o rw /dev/block/vold/179\:98 /data/sdcard2/       手动挂载SD卡第二分区
+(注：手机外置存储移动到内存需要cp命令，而不是mv命令；如果只是内存之间的移动就不需要)
+
+
+
+pin破解wifi路由器：
+airmon-ng start wlan0
+airodump-ng wlan0mon
+reaver -i wlan0mon -b C8:3A:35:30:3E:C8 -vv -a          sudo reaver -i mon0 -b A8:BD:3A:B6:8E:AB  -c 11 -v -a -n -x20 -r100:10 -l300 -p pin
+airodump-ng -c 6 --bssid C8:3A:35:30:3E:C8 wlan0mon     
+aireplay-ng -0 30 -a C8:3A:35:30:3E:C8 -c B8:E8:56:09:CC:9C wlan0mon
+airmon-ng stop wlan0mon
+
+根据mac获取essid(对方隐藏essid):
+airodump-ng -c 6 --bssid C8:3A:35:30:3E:C8 wlan0mon
+aireplay-ng -0 30 -a C8:3A:35:30:3E:C8 -c B8:E8:56:09:CC:9C wlan0mon
+
+
+
+
+下载工具：
+1.http/https协议链接下载
+aria2c -d 目录 -c (断点续传) -x url1 url2  -s 2(2个线程分段下载) -o 输出文件 http/https/.torrent链接   =========前端 直接下载
+sudo aria2c --conf-path=/etc/aria2/aria2.conf -D 后台运行    rpc下载  (等价于aria2c --enable-rpc=true --rpc-listen-all=true --rpc-allow-origin-all=true  --file-allocation=none --max-connection-per-server=3 --max-concurrent-downloads=5 --continue -d 目录  ；等待浏览器将下载的链接添加到aria2，配合网盘助手插件；配置文件将下载目录设置为了/media/nomad/缓存1/Aria2/下，需提前挂载缓存盘)（可以充当uGet图形化界面下载器的插件,Aria2 WebUI 和 YAAW （查看下载进度）都有设置 ）
+	或者  ps:建议把参数保存为可执行脚本，sudo gedit /usr/local/bin/Aria2c(直接终端命令Aria2c)
+	 或者  ps:自定义服务aria2，sudo vim /etc/init.d/ariar2，chmod +x /etc/init.d/ariar2，添加一个服务：sudo update-rc.d srv_name defaults，删除一个服务 ：sudo update-rc.d–f srv_name remove（使用sudo service srv_name start|stop|status|restart|uninstall来做临时性的管理）
+
+
+wget -P 目录 -O 输出文件 http/https/.torrent链接
+2.种子下载
+transmission-gtk .torrent链接/.torrent本地文件路径   （下载种子文件专用）
+
+
+iwconfig wlan0 up
+
+花生壳客户端:phddns start
+花生壳用户名SN：ORAYb8a4dc188440  password:admin     huntingboy  gao654321 
+域名：n17459068v.iask.in:14934    mysql端口被修改为和外部服务端口一致(/etc/mysql/mysql.conf.d/mysqld.cnf    port):14934 ，不然内网穿透连不上。		
+/usr/bin/oraysl -a 127.0.0.1 -p 16062 -s phsle02.oray.net:6061 -d
+
+
+huntingboy  gao654321
+域名：n17459068v.iask.in:33440 ===>   127.0.0.1:8080（外网连接数据库）（外部可访问）
+SN:ORAY1830d0344c98
+Default password: admin
+Remote Management Address http://b.oray.com
+域名:20180v6s37.imwork.net
+
+
+花生壳路由器和网页配置内网穿透只需要配置一项就行。
+http://192.168.1.105:30080
+向日葵识别码：Quick Code: 179167875	Security Code: 8477
+
+
+
+命令行编译android :To clean project:./gradlew clean	To build project:./gradlew build	To assemble code without checking and install debug version of the application on a device:./gradlew installDebug   
+解决lint错误 :  app/build.prop添加lintOptions {
+      abortOnError false
+  }
+解决错误pp:transformResourcesWithMergeJavaResForDebug:: app/build.prop添加packagingOptions{
+exclude 'META-INF/LICENSE'
+exclude 'META-INF/NOTICE'
+exclude 'META-INF/DEPENDENCIES'
+}
+
+myeclipse在f盘下 ： sudo mount /dev/sda7 /media/nomad/work/
+
+
+
+
+
+refresh hosts:  进入/home/nomad/Downloads/hosts目录下
+		export PATH=../node-v9.4.0-linux-x64/bin:$PATH
+		npm install
+		./build.sh
+		hosts/output/hosts文件
+		
+linux配置ssr服务器：https://github.com/getlantern/forum/issues/5620
+linux配置ssr客户端：https://www.jianshu.com/p/c336fd0bdfbe
+			sudo gedit /etc/shadowsocks.json 
+			cd Downloads/shadowsocks/shadowsocks/
+			local.py -c /etc/shadowsocks.json &
+			
+
+
+创建服务：/etc/init.d/ 创建服务文件
+重新加载更改后的服务：sudo systemctl daemon-reload
+把服务设为开机启动：update-rc.d xxx defaults NN命令(xxx为文件 NN为启动顺序)
+把服务从开机启动删除：sudo update-rc.d -f test remove  或者 sudo mv /etc/rc5.d/S***  /etc/rc5.d/K***
+sudo update-rc.d apache2 disable   sudo update-rc.d apache2 enable
+
+禁止Mysql开机启动上述无效  解决：
+#禁止启动
+sudo systemctl disable mysql
+#开机启动
+sudo systemctl enable mysql
+
+
+法一：git clone -b manyuser https://github.com/Ssrbackup/shadowsocksr.git
+ssr client for linux 配置：python local.py -c/etc/shadowsocks.json -d start | stop | restart
+查看日志：tail -f/var/log/shadowsocks.log
+法二：wget http://www.djangoz.com/ssr
+sudo mv ssr /usr/local/bin
+sudo chmod 766 /usr/local/bin/ssr
+
+jobs -p/s/r/l
+kill %id
+
+
+
+ssr install
+ssr config
+
+			
+apt-get purge
+这条命令可以用来删除软件包及其配置文件．
+apt-get remove
+这条命令用来删除系统上的软件包，
+apt-get clean
+当apt-get安装或升级软件包时，它会将deb安装包下载到文件系统的/var/cache/apt/archives目录下．软件包安装完成后，这些deb安装包基本上就没有什么用处了．apt-get clean命令可以帮你删除这些deb安装包．
+你可以使用下面的命令查看/var/cache/apt/archives目录下deb安装包的大小．
+du -sh /var/cache/apt/archivessudo apt-get -f install. 来自动满足未满足的依赖关系
+
+如果您将执行许可权分配到 nnfmath1 文件，发出此命令会得到相同的结果：
+nohup nnfmath1
+要使运行的进程忽略所有挂起信号，请输入：
+nohup -p 161792
+
+
+终端走代理：
+$ export http_proxy=http://localhost:8123 # 当前终端使用代理
+$ unset http_proxy # 当前终端取消代理
+$ http_proxy=http://localhost:8123 curl ip.gs #查询你的IP地址和地理信试息
+# 加上hp(.bashrc配置的别名)，才能达到1M/s以上的下载速度
+wget hp https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.9/opencv-2.4.9.zip/download
+#为git添加代理，gp在.bashrc配置别名
+git clone https://github.com/gmarik/Vundle.vim.git $gp
+#或者如下:
+ git config --global http.proxy 'socks5://127.0.0.1:1080'
+ git config --global https.proxy 'socks5://127.0.0.1:1080'
+ git clone --recursive git://github.com/Valloric/YouCompleteMe
+  
+  
+  
+  
+
+sudo apt-get install libwebkitgtk-1.0-0 解决myeclipse swterror no more handles.
+
+sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1   解决android studio缺少32bit库 特别注意：无法解决依赖问题一定要切换到官方源(设置里面)：mirror.ubuntu.com
+
+android studio即使走了本地代理127.0.0.1 : 1080也无法翻墙 解决办法：root运行android studio，挂代理,或者直接换代理节点
+
+android studio 2.3.3解决新建项目cannot resolve junit:4.12  ****  ：
+注释掉androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+          exclude group: 'com.android.support', module: 'support-annotations'
+      })
+      testCompile 'junit:junit:4.12'
+      
+Android studio 安装apk时报错：INSTALL_FAILED_NO_MATCHING_ABIS: Failed to extract native libraries：添加一下代码到第2个gradle
+Android{
+	****
+	splits {
+   	 abi {
+       	 enable true
+       	 reset()
+         include 'x86', 'armeabi-v7a','x86_64'
+         universalApk true
+   	 }
+   	 }
+   	 *****
+}
+
+adnroid studio design:v7兼容包位置：/opt/android/sdk/extras/android/m2repository/com/android/support/appcompat-v7(or design)/***
+
+修改gradle版本步骤:
+1.下载gradle
+2.file->project structure->project->gradle version修改
+3.file->setting->build *** ->gradle->选择local gradle
+
+git远程项目到本地需要修改下面3个文件配置，并且导入相应包：
+第一个gradle:配置gradle仓库链接，gradle plugin 版本 （/opt/and***studio/gradle/m2repository/com/android/tools/build/gradle/***）
+第二个gradle：配置sdk版本，编译工具版本，依赖包
+第四个gradle(gradle-wrapper.property):配置gradle的版本和路径
+
+
+#查看nginx进程pid：
+ps -ef | grep nginx
+#通过nginx进程pid查看占用端口（进程pid为9836）
+netstat -nap | grep 9836
+查看端口进程
+lsof -i:3306
+
+# 打印文件基本信息（文件类型、页面数、大纲项目数）
+caj2pdf show [input_file]
+# 转换文件
+caj2pdf convert [input_file] -o/--output [output_file]
+# 从 CAJ 文件中提取大纲信息并添加至 PDF 文件
+## 遇到不支持的文件类型或 Bug 时，可用 CAJViewer 打印 PDF 文件，并用这条命令为其添加大纲
+caj2pdf outlines [input_file] -o/--output [pdf_file]
+例如：
+caj2pdf show test.caj
+caj2pdf convert test.caj -o output.pdf
+caj2pdf outlines test.caj -o printed.pdf
+
+
+wine和winetricks默认运行环境win64 保存目录：~/.wine/***
+为win32创建的目录：WINEPREFIX=~/.wine32 WINEARCH=win32 wineboot 结果：~/.win32/***
+#用win32环境运行winetricks   
+env WINEPREFIX="/home/nomad/.wine32/" winetricks [option]
+#用win32环境运行wine
+WINEPREFIX="/home/youname/Windows" wine “****.exe”
+wine err : cannot find c://windows/system32/explorer.exe解决方法：卸载重装winehq-stable及其依赖包
+~/Downloads/install_wine.sh
+
+
+#生成tags 或 f5
+ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .
+#安装需要的插件 或者使用pathogen管理：在~/.vim/bundle目录下git clone ×××.vim
+vim-addons install omnicppcomplete
+vim-addons install taglist
+vim-addons install winmanager
+vim-addons install minibufexplorer
+"按下F3自动补全代码
+imap <F3> <C-X><C-O>
+"按下F2根据头文件内关键字补全
+imap <F2> <C-X><C-I>
+
+
+#YCM
+Java support: install JDK8 (version 8 required) and add --java-completer when calling ./install.py   <===>    ~/.vim/y**me/.install.py --java-completer
+c++ support: ~/.vim/y**me/.install.py --clang-completer
+1.下载clang+llvm-5.0.1-x86_64-linux-gnu-ubuntu-14.04.tar.xz（Downloads下有备份）
+2.复制包到~/.vim/yo**m/third_party/ycmd/clang_archieves/
+3.sudo apt-get install build-essential cmake	sudo apt-get install python-dev python3-dev
+sudo apt-get install python-dev libxml2-dev libxslt-dev

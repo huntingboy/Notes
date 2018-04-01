@@ -1,0 +1,23 @@
+win10 装ubuntu16.04:uefi(老板bios升级版)引导，需要f1进bios关闭secure boot，调整efi方式启动，调整boot启动顺序，boot mode 默认 quick，默认os optimize default为true.
+
+ifconfig(eth0:以太网卡;lo;本地;wlp3s0：无线网卡)
+lshw -C network：查看网卡类型
+lspci -v：查看设备驱动是否in use
+解决无线网卡驱动：离线升级linux内核：linux-header  linux-image
+		安装   /U盘(软碟通制作的启动盘)/pool/main/d/...和pool/restrict/b/...;重启
+		若不行则安装驱动包  ~/Downloads/archive.ubuntu.com/ubuntu/pool/main/l/linux-firmware/linux-firmware-***all.deb（我在intel官网下载的驱动×××.ucode移动到/lib/firmware/ 没有成功）（download/下有备份）;重启
+
+
+
+解决蓝牙无法点击：需要在win10打开蓝牙
+
+Failed to mount '/dev/sda6': 不允许的操作
+The NTFS partition is in an unsafe state. Please resume and shutdown
+Windows fully (no hibernation or fast restarting), or mount the volume
+read-only with the 'ro' mount option.
+解决方法2种：
+1、暂时解决：进入win10，关机使用shutdown /s 或者重启  或者 Linux下sudo ntfsfix /dev/sda6
+2、永久解决：bios关闭quick start
+
+
+
