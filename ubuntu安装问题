@@ -18,6 +18,3 @@ read-only with the 'ro' mount option.
 解决方法2种：
 1、暂时解决：进入win10，关机使用shutdown /s 或者重启  或者 Linux下sudo ntfsfix /dev/sda6
 2、永久解决：bios关闭quick start
-
-
-

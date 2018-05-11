@@ -72,24 +72,6 @@ transmission-gtk .torrent链接/.torrent本地文件路径   （下载种子文�
 
 iwconfig wlan0 up
 
-花生壳客户端:phddns start
-花生壳用户名SN：ORAYb8a4dc188440  password:admin     huntingboy  gao654321 
-域名：n17459068v.iask.in:14934    mysql端口被修改为和外部服务端口一致(/etc/mysql/mysql.conf.d/mysqld.cnf    port):14934 ，不然内网穿透连不上。		
-/usr/bin/oraysl -a 127.0.0.1 -p 16062 -s phsle02.oray.net:6061 -d
-
-
-huntingboy  gao654321
-域名：n17459068v.iask.in:33440 ===>   127.0.0.1:8080（外网连接数据库）（外部可访问）
-SN:ORAY1830d0344c98
-Default password: admin
-Remote Management Address http://b.oray.com
-域名:20180v6s37.imwork.net
-
-
-花生壳路由器和网页配置内网穿透只需要配置一项就行。
-http://192.168.1.105:30080
-向日葵识别码：Quick Code: 179167875	Security Code: 8477
-
 
 
 命令行编译android :To clean project:./gradlew clean	To build project:./gradlew build	To assemble code without checking and install debug version of the application on a device:./gradlew installDebug   

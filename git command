@@ -1,12 +1,18 @@
+#首先要登录github创建repository
+
 #命令行托管代码
 echo "# TravellMap" >> README.md (optional)
 git init
 git add README.md
 git commit -m "first commit" 
-#创建远程仓库   origin为"remote name"，后面要用  TravellMap为"repository name"
+#w origin为"remote name"，后面要用  TravellMap为"repository name"
 git remote add origin https://github.com/huntingboy/TravellMap.git
 #传到github相应仓库上面
 git push -u origin master
+#如果在github的remote上已经有了文件，会出现错误。此时应当先pull一下，即：
+git pull origin master
+git push origin master
+
 
 #可选：
 #看日志
@@ -29,5 +35,8 @@ git reset ***(随机的code)
 
 
 
-			#问题描述							  				解决方法	
-remote reposotory created but authorention failed			不选file->setting->vesion control->github->use ssh
+			#问题描述							  									解决方法	
+remote reposotory created but authorention failed					不选file->setting->vesion control->github->use ssh
+fatal: repository 'https://github.com/huntingboy/Notes.git/' not found			先登录github.com创建repository  "Notes"
+git clone --recursive **** 报错rpc end of file 						git init ;git config http.postBuffer 524288000 ; git clone ***
+

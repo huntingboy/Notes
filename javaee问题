@@ -1,0 +1,13 @@
+部署发布项目的时候，无法选择tomcat7服务器，报错The server does not support version 3.1 of the JEE Web module specification:
+解决方案：打开项目根目录下.settings的文件夹，该文件夹下有一个org.eclipse.wst.common.project.facet.core.xml文件，把<installed facet="jst.web" version="3.1"/>  改为3.0.
+
+mysql中文乱码：
+在 【client】下追加：
+default-character-set=utf8
+在 【mysqld】下追加：
+character-set-server=utf8
+在 【mysql】 下追加：
+default-character-set=utf8
+注： 我的【mysqld】在 /etc/mysql/mysql.conf.d/mysqld.cnf 
+我的【mysql】 在 /etc/mysql/conf.d/mysql.cnf 
+我的【client】 在 /etc/mysql/debian.cnf
