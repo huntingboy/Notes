@@ -170,8 +170,23 @@ sudo apt-get install libwebkitgtk-1.0-0 解决myeclipse swterror no more handles
 sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1   解决android studio缺少32bit库 特别注意：无法解决依赖问题一定要切换到官方源(设置里面)：mirror.ubuntu.com
 
 android studio即使走了本地代理127.0.0.1 : 1080也无法翻墙 解决办法：root运行android studio，挂代理,或者直接换代理节点
+android studio即使设置不用代理,但还是走了本地代理, 到~/.gradle/gradle.properties(win:C:\users\**\.gradle\)中去掉设置代理部分的代码
 
-android studio 2.3.3解决新建项目cannot resolve junit:4.12  ****  ：
+android studio给每个新建的project都添加国内仓库(避免在项目中手动添加): ~/.gradle/新建init.gradle文件,添加如下代码:
+allprojects {
+    repositories {
+        maven {
+            name "aliyun1"
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        maven{
+            name "aliyun2"
+            url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
+        }
+    }
+}
+
+android studio 2.3.3解决新建项目cannot resolve junit:4.12  ****  ：(终极解决方案: 加国内可用仓库到project:build.gradle中)
 注释掉androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
           exclude group: 'com.android.support', module: 'support-annotations'
       })
