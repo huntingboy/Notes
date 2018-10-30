@@ -116,6 +116,20 @@ sudo systemctl disable mysql
 #开机启动
 sudo systemctl enable mysql
 
+定时开机:bios设置
+定时关机:
+ *  *  * *  *  command
+分 时 日 月 周  命令
+1、crontab -e 回车
+2、添加任务，并保存
+#每天下午19:00定时关机
+55 18 * * * /sbin/shutdown -h 19:00
+3、查看任务列表
+crontab -l
+4重启一下服务
+systemctl reload crond.service
+
+
 
 法一：git clone -b manyuser https://github.com/Ssrbackup/shadowsocksr.git
 ssr client for linux 配置：python local.py -c/etc/shadowsocks.json -d start | stop | restart
