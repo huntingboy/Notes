@@ -254,3 +254,31 @@ c++ support: ~/.vim/y**me/.install.py --clang-completer
 2.复制包到~/.vim/yo**m/third_party/ycmd/clang_archieves/
 3.sudo apt-get install build-essential cmake	sudo apt-get install python-dev python3-dev
 sudo apt-get install python-dev libxml2-dev libxslt-dev
+
+
+# 终端链接wifi
+  ## 停止network-manager wifi ui管理界面
+  sudo service network-manager stop
+  ## 关闭开机自动启动该服务
+  sudo systemctl disable network-manager.service
+  ## 扫描周边wifi信息
+  iw dev wlan0 scan
+  ## 配置wifi信息
+  sudo vim /etc/wpa_supplicant/wpa_supplicant.conf
+	network={
+	ssid="xx"
+	psk="xxx"
+	priority=1
+	}
+  ## 后台启动服务
+  sudo wpa_supplicant -i wlan0 -B -c /etc/wpa_supplicant.conf
+  ## 配置ip
+    ### dhcp方式
+	dhclient wlan0
+    ### 静态方式
+	sudo ifconfig wlan0 192.168.1.110 netmask 255.255.255.0
+  ## 路由表添加默认网关
+  sudo route add default gw 192.168.1.1
+
+
+

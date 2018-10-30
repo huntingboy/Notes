@@ -18,19 +18,3 @@ read-only with the 'ro' mount option.
 解决方法2种：
 1、暂时解决：进入win10，关机使用shutdown /s 或者重启  或者 Linux下sudo ntfsfix /dev/sda6
 2、永久解决：bios关闭quick start
-
-
-目录中文改英文：
- export LANG=en_US
- xdg-user-dirs-gtk-update
- epxort LANG=zh_CN
-
- 将系统装在移动硬盘:
-   需要分两个区 /efi fat32 系统区（100MB），提前分好
-		空闲分区，用于安装时候使用，也可以提前分好（/ swap /home）
-
-
-移动硬盘系统装好后，进不去：
-   grub界面按e==>查看set root设备号是否正确(提前lspci查看,比如/dev/sdc2)
-   修改后按f10加载启动，如果还是错误（noveal,invalid table pointer to.....）:
-	重启,grub界面按e==>修改设备号 ；  root最后面添加 nomodeset;按f10加载启动
