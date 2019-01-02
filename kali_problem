@@ -25,6 +25,6 @@ aptsources.distro.NoDistroTemplateException: Error: could not find a distributio
 msf exploit打开了 但是进不去meterpreter命令行   ：  enter     sessions -l   sessions -i sessionId
 
 
-fluxion获取握手包后，创建evil twin ad-hoc，最后一步失败，没有热点            前面工作没做好:sudo ifconfig wlan1 down; sudo airmon-ng start wlan1(前面一步不做，这里会显示device busy); sudo ifconfig wlan1mon up   正常状态：Power Management:on  mode:Master,Monitor   Frequency:2.457 GHz  (不要使用iwconfig一个个设置，因为无法设置power on ，operation not support???)
+fluxion获取握手包后，创建evil twin ad-hoc，最后一步失败，没有热点            前面工作没做好:sudo ifconfig wlan1 down; sudo airmon-ng start wlan1(前面一步不做，这里会显示device busy); sudo ifconfig wlan1mon up   正常状态：Power Management:on  mode:Master,Monitor   Frequency:2.457 GHz  (不要使用iwconfig一个个设置，因为无法设置power on ，operation not support???)   ======  后来发现应该是网卡是否支持monitor，ap等模式导致的，包括使用mdk3,fluxion,airbase-ng也会出现同样的问题(rtl8187l只支持monitor模式，不支持ap模式)
 
 修改文件名乱码：			convmv -f GBK -t UTF-8 --notest -r*  // notest表示真正进行操作 -f:源格式 -t：目标格式  —r：recursive
