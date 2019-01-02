@@ -106,7 +106,7 @@ linux配置ssr客户端：https://www.jianshu.com/p/c336fd0bdfbe
 
 创建服务：/etc/init.d/ 创建服务文件
 重新加载更改后的服务：sudo systemctl daemon-reload
-把服务设为开机启动：update-rc.d xxx defaults NN命令(xxx为文件 NN为启动顺序)
+把服务设为开机启动：cd /etc/init.d/    ; update-rc.d xxx defaults NN命令(xxx为文件 NN为启动顺序)
 把服务从开机启动删除：sudo update-rc.d -f test remove  或者 sudo mv /etc/rc5.d/S***  /etc/rc5.d/K***
 sudo update-rc.d apache2 disable   sudo update-rc.d apache2 enable
 
@@ -309,5 +309,13 @@ sudo apt-get install python-dev libxml2-dev libxslt-dev
   ## 路由表添加默认网关
   sudo route add default gw 192.168.1.1
 
+
+# 安装福昕阅读器 https://blog.csdn.net/github_38704428/article/details/79091407
+wget http://cdn07.foxitsoftware.cn/pub/foxit/reader/desktop/linux/2.x/2.1/en_us/FoxitReader2.1.0805_Server_x64_enu_Setup.run.tar.gz
+tar xvzf FoxitReader2.1.0805_Server_x64_enu_Setup.run.tar.gz
+sudo ./FoxitReader.enu.setup.2.1.0805\(r225432\).x64.run
+## 解决不能输入中文问题
+修改FoxitReader.sh，注释掉export那一行即可
+#export LD_LIBRARY_PATH      #加上#，注释掉这一行即可
 
 
