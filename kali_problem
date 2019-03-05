@@ -28,3 +28,35 @@ msf exploit打开了 但是进不去meterpreter命令行   ：  enter     sessio
 fluxion获取握手包后，创建evil twin ad-hoc，最后一步失败，没有热点            前面工作没做好:sudo ifconfig wlan1 down; sudo airmon-ng start wlan1(前面一步不做，这里会显示device busy); sudo ifconfig wlan1mon up   正常状态：Power Management:on  mode:Master,Monitor   Frequency:2.457 GHz  (不要使用iwconfig一个个设置，因为无法设置power on ，operation not support???)   ======  后来发现应该是网卡是否支持monitor，ap等模式导致的，包括使用mdk3,fluxion,airbase-ng也会出现同样的问题(rtl8187l只支持monitor模式，不支持ap模式)
 
 修改文件名乱码：			convmv -f GBK -t UTF-8 --notest -r*  // notest表示真正进行操作 -f:源格式 -t：目标格式  —r：recursive
+
+无法apt安装wine: (或者git项目Wine-QQ上面有自动安装32/64位wine脚本,还没试) 
+1.git clone git@github.com:wine-mirror/wine.git
+2../configure --enable-win64 --without-freetype  && make && make  install
+3.安装32位库：
+	sudo apt-get install ia32-libs
+	sudo apt-get install gcc-multilib g++-multilib
+	sudo apt-get install xserver-xorg-dev:i386 libfreetype6-dev:i386 (安装如果出现dpkg info --unpack错误看下面解决方法)
+4../configure
+
+DPKG: 处理归档 /VAR/CACHE/APT/ARCHIVES/软件名 (–UNPACK)时出错:
+#备份原来的dpkg info
+sudo mv /var/lib/dpkg/info /var/lib/dpkg/baks
+#建立新的bpdk info文件夹
+sudo mkdir /var/lib/dpkg/info
+
+sudo apt-get update
+
+sudo apt-get install -f
+#讲新的追加到新备份中
+sudo mv /var/lib/dpkg/info /var/lib/dpkg/baks
+#删除不要的
+sudo rm /var/lib/dpkg/info -r
+#重新设为info
+sudo mv /var/lib/dpkg/baks /var/lib/dpkg/info
+
+
+kali linux上安装virtualbox后启动虚拟机 modprobe vboxdrv错误 ：
+apt purge virtualbox
+apt update 
+reboot
+apt install virtualbox
