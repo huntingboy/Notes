@@ -60,3 +60,10 @@ apt purge virtualbox
 apt update 
 reboot
 apt install virtualbox
+
+
+配置web渗透环境DVWA（包含sql注入、文件上传、xss等web漏洞）错误：
+PHP function allow_url_include: disabled  :   vim /etc/php/7.0/apache2/php.ini修改allow_url_include = On
+PHP module gd: Missing  ： apt-cache search php | grep gd ;  apt install php7.0-gd 
+PHP module mysql: Missing : apt-cache search php | grep mysql;  apt install php7.0-mysql
+
